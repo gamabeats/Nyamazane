@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>/* Basic reset */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Inter', 'Oswald', Arial, sans-serif; background: linear-gradient(180deg,#0b0b0b 0%, #161616 100%); color: #f3f3f3; -webkit-font-smoothing:antialiased; }
+.container { max-width: 1200px; margin: 0 auto; padding: 28px 20px; }
+
+/* NAV */
+.navbar { background: transparent; position: sticky; top: 0; z-index: 40; }
+.nav-container { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 14px 20px; backdrop-filter: blur(6px); }
+.logo { display: flex; align-items: center; gap: 12px; }
+.brand-name { font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; font-size: 1.05rem; letter-spacing: 1px; }
+.nav-menu { list-style: none; display: flex; gap: 14px; margin: 0; padding: 0; align-items: center; }
+.nav-menu a { color: #fff; text-decoration: none; padding: 8px 14px; border-radius: 8px; transition: all .18s ease; }
+.nav-menu a.active, .nav-menu a:hover { background: rgba(212,175,55,0.12); transform: translateY(-2px); }
+.hamburger { display: none; cursor: pointer; }
+.hamburger span { display: block; height: 3px; width: 24px; background: #fff; margin: 4px 0; border-radius: 4px; }
+
+/* HERO */
+.hero { background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('../images/hero.svg') center/cover no-repeat; padding: 96px 20px; text-align: center; display:flex; align-items:center; justify-content:center; }
+.hero h1 { font-size: 3.4rem; margin: 0 0 8px 0; font-family: 'Oswald', sans-serif; letter-spacing:2px; }
+.hero p { font-size: 1.05rem; margin: 0 0 8px 0; color: #e6e6e6; }
+.hero .tagline { color: #f1e8d6; opacity: 0.95; margin-bottom: 16px; }
+.btn { display: inline-flex; align-items:center; gap:8px; padding: 10px 18px; background: rgba(255,255,255,0.03); color: #fff; text-decoration: none; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04); cursor: pointer; }
+.btn-primary { background: linear-gradient(90deg,#d4af37,#ffd66b); color: #111; font-weight: 700; border: none; box-shadow: 0 8px 22px rgba(212,175,55,0.18); }
+.btn-secondary { background: transparent; border: 1px solid rgba(212,175,55,0.22); color: #d4af37; }
+
+/* FEATURES */
+.features { padding: 40px 20px; }
+.feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.feature-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding: 22px; border-radius: 12px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.45); transition: transform .18s ease; }
+.feature-card:hover{ transform: translateY(-6px); }
+.feature-card h3{ margin: 8px 0 6px 0; }
+.feature-icon { font-size: 30px; margin-bottom: 12px; }
+
+/* PRODUCTS */
+.featured-products { padding: 40px 20px; }
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.product-card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.55); transition: transform .18s ease, box-shadow .18s ease; }
+.product-card:hover{ transform: translateY(-8px); box-shadow: 0 18px 42px rgba(0,0,0,0.6); }
+.product-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.product-info { padding: 16px; }
+.product-details { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-top: 12px; }
+.price { color: #ffd66b; font-weight: 800; }
+
+/* ABOUT */
+.about-preview { padding: 40px 20px; }
+.about-content { display: flex; gap: 28px; align-items: center; }
+.about-text { flex: 1; }
+.about-image img { width: 360px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+
+/* TESTIMONIALS */
+.testimonials { padding: 40px 20px; }
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.testimonial-card { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01)); padding: 18px; border-radius: 12px; }
+
+/* FOOTER */
+.footer { background: transparent; padding: 36px 20px 28px 20px; margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.03); }
+.footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.footer a { color: #ddd; text-decoration: none; }
+.footer-bottom { margin-top: 18px; text-align: center; color: #aaa; }
+
+/* PRODUCTS PAGE */
+.products-page .products-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.products-page .product-card { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01)); padding: 12px; border-radius: 10px; }
+
+/* CART */
+.cart-page #cart-items { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01)); padding: 14px; border-radius: 12px; margin-bottom: 12px; }
+
+/* Contact form improvements */
+.contact-page form { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); padding: 18px; border-radius: 12px; max-width: 720px; margin: 0 auto; display: grid; gap: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+.contact-page label { font-size: 0.95rem; color: #e9e9e9; }
+.contact-page input[type="text"], .contact-page input[type="email"], .contact-page textarea { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color: #fff; }
+.contact-page button.btn-primary { justify-self: start; }
+
+/* small utilities */
+.muted { color: #bdbdbd; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-content { flex-direction: column; }
+    .nav-menu { display: none; }
+    .hamburger { display: block; }
+}
+
+@media (max-width: 600px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .products-page .products-list { grid-template-columns: 1fr; }
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart | Nyamazane</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <svg width="50" height="50" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M150 20 C210 40 250 65 250 65 L230 170 C200 220 150 245 150 245 C150 245 100 220 70 170 L50 65 C50 65 90 40 150 20 Z" fill="white" stroke="black" stroke-width="2"/>
+                        <path d="M140 90 Q150 75 160 90 Q155 95 150 90 Q145 95 140 90 Z" fill="black"/>
+                        <path d="M145 85 Q120 35 155 55 Q135 25 165 45" fill="none" stroke="black" stroke-width="3"/>
+                        <path d="M155 85 Q180 35 145 55 Q165 25 135 45" fill="none" stroke="black" stroke-width="3"/>
+                        <text x="150" y="115" font-size="11" text-anchor="middle" font-family="Playfair Display" fill="black">EST</text>
+                        <text x="150" y="140" font-size="24" text-anchor="middle" font-family="Playfair Display" font-weight="600" letter-spacing="2" fill="black">NYAMAZANE</text>
+                    </svg>
+                    <span class="brand-name">Nyamazane</span>
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html" class="active">🛒 Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- HEADER / HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Premium Wild Game Dried Meat</h1>
+            <p>Authentic Hunter's Taste | Proudly South African</p>
+            <p class="tagline">Ethically Sourced • Traditionally Prepared • Protein-Rich</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+        </div>
+    </header>
+
+    <main class="container cart-page">
+        <h1>Your Cart</h1>
+        <div id="cart-items">
+            <!-- Cart items rendered by js -->
+        </div>
+        <div id="cart-summary" style="display:flex; align-items:center; justify-content:space-between; gap:12px; max-width:480px; margin-top:18px">
+            <div><strong>Total: <span id="cart-total">R0</span></strong></div>
+            <div>
+                <button id="checkout-btn" class="btn btn-primary">Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="products.html">Our Products</a></li>
+                        <li><a href="#">Our Process</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Email Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nyamazane Wild Game | All Rights Reserved</p>
+                <p>Proudly South African 🇿🇦 | Premium Quality Since Inception</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
